@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Task 2</title>
+</head>
+
+<body>
+<fieldset style="border: none;">
+    <div>
+        <div style="background-color: rgb(205, 183, 226); padding: 50px; width: 400px;">
+            basketball products: <input type="text" id="adding" readonly value="0"  size="5">
+            <button id="add">+</button>
+            <button id="minus">-</button>
+            <br><br>
+            shipping and handling fee: <input type="text"  readonly id="shipping" size="5" >
+        </div>
+        <br>
+        <br>
+        <div style="padding: 50px; background-color: rgb(236, 209, 247); width: 400px;">
+        <h1>Order Summary</h1>
+        <br>
+
+        Shipping & Handling: $4.99
+
+        <br>
+        Total Before Tax: <p id="before_tax"></p>
+        <br>
+        Estimated Tax(10%): <p id="estimated_tax"></p>
+
+        <br>
+
+        <h1 style="color: red;">order total:</h1>  <h1 id="total"></h1>
+
+        <br><br>
+        
+        <a href="index.html">Go back to Final Task 2</a>
+        </div>
+    </div>
+</fieldset>
+
+
+<script>
+const shipping = 4.99;
+let quantity=1;
+
+document.getElementById("shipping").value = parseFloat(shipping);
+
+
+const add = document.getElementById("add");
+const adding_Input = document.getElementById("adding");
+const minus = document.getElementById("minus");
+
+function updateNumItems(increment) {
+let adding = parseInt(adding_Input.value);
+adding += increment;
+if (adding < 0) {
+adding = 0;
+}
+adding_Input.value = adding;
+
+
+const price = 15.97;
+const quantity = parseFloat(adding_Input.value);
+const subtotal = quantity * parseFloat(price);
+const shipping = parseFloat(document.getElementById("shipping").value);
+const before_tax = subtotal + shipping;
+const taxrate = 0.1;
+const withtax = subtotal * taxrate;
+const total = before_tax + withtax;
+const estimated_tax = taxrate * before_tax  ;
+
+document.getElementById("before_tax").innerHTML = before_tax.toFixed(2);
+document.getElementById("total").innerHTML = total.toFixed(2);
+document.getElementById("estimated_tax").innerHTML = estimated_tax.toFixed(2);
+}
+
+add.addEventListener("click", () => updateNumItems(1));
+minus.addEventListener("click", () => updateNumItems(-1));
+</script> 
+
+</body>
+</html>
